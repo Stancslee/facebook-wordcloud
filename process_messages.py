@@ -3,7 +3,6 @@
 Justin Ly
 """
 
-
 def main():
     """
     1. Read in the .json file containing messages
