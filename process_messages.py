@@ -32,6 +32,7 @@ def main():
     for i, row in df.iterrows() :
         curr_msg = str(row['content'])
         valid = True
+
         for phrase in invalid_msg_endings:
             if phrase in curr_msg:
                 valid = False
