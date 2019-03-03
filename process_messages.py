@@ -15,6 +15,7 @@ def main():
     all_data = dict()
     file_path = 'data/message.json'
     keep_columns = ['content', 'sender_name']
+    invalid_msg_endings = ['sent a photo.', 'changed the group photo.']
 
     with open(file_path, 'r') as f:
         all_data = json.loads(f.read())
@@ -29,7 +30,14 @@ def main():
 
     all_messages = []
     for i, row in df.iterrows() :
-        all_messages.append(str(row['content']).strip())
+        curr_msg = str(row['content'])
+        valid = True
+        for phrase in invalid_msg_endings:
+            if phrase in curr_msg:
+                valid = False
+
+        if valid:
+            all_messages.append(str(row['content']).strip())
 
     all_messages = ' '.join(all_messages)
     print(all_messages)
