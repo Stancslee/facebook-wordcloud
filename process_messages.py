@@ -14,14 +14,19 @@ def main():
 
     all_data = dict()
     file_path = 'data/message.json'
+    keep_columns = ['content', 'sender_name']
 
     with open(file_path, 'r') as f:
         all_data = json.loads(f.read())
 
     flip_tards = all_data['participants']
     flip_tards = [x['name'] for x in flip_tards]
-    table = pd.DataFrame(all_data['messages'])
-    print(table)
+    df = pd.DataFrame(all_data['messages'])
+
+    all_cols = list(df.columns.values)
+    drop_cols = [x for x in all_cols if x not in keep_columns]
+    df = df.drop(drop_cols, axis=1)
+    print(df)
 
 if __name__ == "__main__":
     main()
