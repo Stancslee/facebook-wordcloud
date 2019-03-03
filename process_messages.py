@@ -26,7 +26,13 @@ def main():
     all_cols = list(df.columns.values)
     drop_cols = [x for x in all_cols if x not in keep_columns]
     df = df.drop(drop_cols, axis=1)
-    print(df)
+
+    all_messages = []
+    for i, row in df.iterrows() :
+        all_messages.append(str(row['content']).strip())
+
+    all_messages = ' '.join(all_messages)
+    print(all_messages)
 
 if __name__ == "__main__":
     main()
